@@ -1,4 +1,4 @@
-import {Field, ID, InputType, ObjectType} from '@nestjs/graphql';
+import { Field, ID, InputType, ObjectType } from '@nestjs/graphql';
 import { RoomType } from './room.type';
 import { UserType } from './user.type';
 import { NotifType } from './notif.type';
