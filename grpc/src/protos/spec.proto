@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package room;
+
+import "google/protobuf/timestamp.proto";
+
+// Message pour représenter une réservation associée à une salle.
+// Adaptez les champs en fonction de votre entité Reservation.
+message Reservation {
+  string id = 1;
+  // Exemple de champ pour la date de réservation (à adapter)
+  google.protobuf.Timestamp reserved_at = 2;
+}
+
+// Message pour représenter une salle (Room)
+message Room {
+  string id = 1;
+  string name = 2;
+  int32 capacity = 3;
+  string location = 4;
+  // Utilisation du type Timestamp pour la date de création
+  google.protobuf.Timestamp created_at = 5;
+  // Liste des réservations associées à la salle
+  repeated Reservation reservations = 6;
+}
+
+// (Optionnel) Définition d'un service gRPC pour gérer les salles.
+service RoomService {
+  // Récupère une salle par son identifiant.
+  rpc GetRoom(GetRoomRequest) returns (Room);
+  
+  // Retourne la liste de toutes les salles.
+  rpc ListRooms(Empty) returns (ListRoomsResponse);
+}
+
+// Message pour la requête GetRoom.
+message GetRoomRequest {
+  string id = 1;
+}
+
+// Message pour la réponse de la méthode ListRooms.
+message ListRoomsResponse {
+  repeated Room rooms = 1;
+}
+
+// Message vide à utiliser pour les requêtes sans paramètre.
+message Empty {}
