@@ -12,14 +12,18 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  keycloackId: string;
+  @Column({
+    name: 'keycloack_id',
+  })
+  keycloack_id: string;
 
   @Column()
   email: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
+  @CreateDateColumn({
+    name: 'created_at',
+  })
+  created_at: Date;
 
   @OneToMany(() => Reservation, (reservation) => reservation.user, {
     cascade: true,

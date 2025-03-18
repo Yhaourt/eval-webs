@@ -14,22 +14,22 @@ body:graphql {
   query {
     reservation(id: "d638f628-d1db-4e58-b38a-38cb531212b2"){
      id
-      startTime
-      endTime
+      start_time
+      end_time
       status
-      createdAt
+      created_at
       room {
         id
         name
         capacity
         location
-        createdAt
+        created_at
       }
       user {
         id
-        keycloackId
+        keycloack_id
         email
-        createdAt
+        created_at
       }
     }
   }

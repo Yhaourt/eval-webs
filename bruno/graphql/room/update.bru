@@ -13,7 +13,7 @@ post {
 body:graphql {
   mutation {
     updateRoom(
-      id: "11e14b9b-0a93-43b5-9f33-0129a71a0430",
+      id: "941a862b-3ca0-4d08-ab39-127cab1356ec",
       input: {
       name: "room",
       capacity: 1,
@@ -23,15 +23,15 @@ body:graphql {
       name
       capacity
       location
-      createdAt
+      created_at
       reservations {
         id
-        roomId
-        userId
-        startTime
-        endTime
+        room_id
+        user_id
+        start_time
+        end_time
         status
-        createdAt
+        created_at
       }
     }
   }

@@ -13,29 +13,29 @@ post {
 body:graphql {
   mutation {
     createReservation(input: {
-      roomId: "11e14b9b-0a93-43b5-9f33-0129a71a0430",
-      userId: "eebc600f-5cb6-4964-9534-61e16df49a71",
-      startTime: "2025-03-19T10:00:00Z",
-      endTime: "2025-03-19T10:00:00Z",
+      room_id: "9514848c-9109-4a92-b5a1-01d2e173df11",
+      user_id: "6b06d45c-399b-4252-add3-023fa1dd5ca3",
+      start_time: "2025-03-19T10:00:00Z",
+      end_time: "2025-03-19T10:00:00Z",
       status: "pending"
-    }) {
+    }) { 
     id
-      startTime
-      endTime
+      start_time
+      end_time
       status
-      createdAt
+      created_at
       room {
         id
         name
         capacity
         location
-        createdAt
+        created_at
       }
       user {
         id
-        keycloackId
+        keycloack_id
         email
-        createdAt
+        created_at
       }
     }
   }

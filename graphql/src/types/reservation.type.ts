@@ -6,12 +6,12 @@ import { NotifType } from './notif.type';
 @ObjectType()
 export class ReservationType {
   @Field(() => ID) id: string;
-  @Field() roomId: string;
-  @Field() userId: string;
-  @Field() startTime: Date;
-  @Field() endTime: Date;
+  @Field() room_id: string;
+  @Field() user_id: string;
+  @Field() start_time: Date;
+  @Field() end_time: Date;
   @Field() status: string;
-  @Field() createdAt: Date;
+  @Field() created_at: Date;
   @Field(() => RoomType) room: RoomType;
   @Field(() => UserType) user: UserType;
   @Field(() => [NotifType]) notifs: [NotifType];
@@ -19,9 +19,9 @@ export class ReservationType {
 
 @InputType()
 export class ReservationInputType {
-  @Field() roomId: string;
-  @Field() userId: string;
-  @Field() startTime: Date;
-  @Field() endTime: Date;
+  @Field() room_id: string;
+  @Field() user_id: string;
+  @Field() start_time: Date;
+  @Field() end_time: Date;
   @Field() status: string;
 }

@@ -7,7 +7,7 @@ type RoomType {
   name: String!
   capacity: Float!
   location: String!
-  createdAt: DateTime!
+  created_at: DateTime!
   reservations: [ReservationType!]!
 }
 
@@ -18,22 +18,22 @@ scalar DateTime
 
 type NotifType {
   id: ID!
-  reservationId: String!
+  reservation_id: String!
   message: String!
-  notificationDate: DateTime!
-  isSent: Boolean!
-  createdAt: DateTime!
+  notification_date: DateTime!
+  is_sent: Boolean!
+  created_at: DateTime!
   reservation: ReservationType!
 }
 
 type ReservationType {
   id: ID!
-  roomId: String!
-  userId: String!
-  startTime: DateTime!
-  endTime: DateTime!
+  room_id: String!
+  user_id: String!
+  start_time: DateTime!
+  end_time: DateTime!
   status: String!
-  createdAt: DateTime!
+  created_at: DateTime!
   room: RoomType!
   user: UserType!
   notifs: [NotifType!]!
@@ -41,9 +41,9 @@ type ReservationType {
 
 type UserType {
   id: ID!
-  keycloackId: String!
+  keycloack_id: String!
   email: String!
-  createdAt: DateTime!
+  created_at: DateTime!
   reservations: [ReservationType!]!
 }
 
@@ -74,7 +74,7 @@ type Mutation {
 }
 
 input UserInputType {
-  keycloackId: String!
+  keycloack_id: String!
   email: String!
 }
 
@@ -85,16 +85,16 @@ input RoomInputType {
 }
 
 input ReservationInputType {
-  roomId: String!
-  userId: String!
-  startTime: DateTime!
-  endTime: DateTime!
+  room_id: String!
+  user_id: String!
+  start_time: DateTime!
+  end_time: DateTime!
   status: String!
 }
 
 input NotifInputType {
-  reservationId: String!
+  reservation_id: String!
   message: String!
-  notificationDate: DateTime!
-  isSent: Boolean!
+  notification_date: DateTime!
+  is_sent: Boolean!
 }

@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   ManyToOne,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 import { User } from './user.entity';
 import { Room } from './room.entity';
@@ -15,27 +16,43 @@ export class Reservation {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  userId: string;
+  @Column({
+    name: 'user_id',
+  })
+  user_id: string;
 
-  @Column()
-  roomId: string;
+  @Column({
+    name: 'room_id',
+  })
+  room_id: string;
 
-  @Column()
-  startTime: Date;
+  @Column({
+    name: 'start_time',
+  })
+  start_time: Date;
 
-  @Column()
-  endTime: Date;
+  @Column({
+    name: 'end_time',
+  })
+  end_time: Date;
 
   @Column()
   status: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
+  @CreateDateColumn({
+    name: 'created_at',
+  })
+  created_at: Date;
 
+  @JoinColumn({
+    name: 'user_id',
+  })
   @ManyToOne(() => User, (user) => user.reservations)
   user: User;
 
+  @JoinColumn({
+    name: 'room_id',
+  })
   @ManyToOne(() => Room, (room) => room.reservations)
   room: Room;
 
