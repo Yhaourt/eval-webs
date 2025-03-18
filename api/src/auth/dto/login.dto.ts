@@ -10,5 +10,4 @@ export class LoginInputDto {
 
 export class LoginOutputDto {
   access_token: string;
-  refresh_token: string;
 }

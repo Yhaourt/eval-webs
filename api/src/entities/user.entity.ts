@@ -15,7 +15,7 @@ export class User {
   @Column({
     name: 'keycloack_id',
   })
-  keycloack_id: string;
+  keycloak_id: string;
 
   @Column()
   email: string;

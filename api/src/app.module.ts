@@ -26,6 +26,7 @@ import { ConfigModule } from '@nestjs/config';
       database: 'pgdb',
       entities: [User, Room, Reservation, Notif],
       synchronize: true,
+      dropSchema: true,
     }),
     TypeOrmModule.forFeature([User, Room, Reservation, Notif]),
     GraphQLModule.forRoot<ApolloDriverConfig>({

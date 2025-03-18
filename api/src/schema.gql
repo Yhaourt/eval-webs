@@ -41,7 +41,7 @@ type ReservationType {
 
 type UserType {
   id: ID!
-  keycloack_id: String!
+  keycloak_id: String!
   email: String!
   created_at: DateTime!
   reservations: [ReservationType!]!
@@ -74,7 +74,7 @@ type Mutation {
 }
 
 input UserInputType {
-  keycloack_id: String!
+  keycloak_id: String!
   email: String!
 }
 

@@ -8,9 +8,17 @@ import {
 import { LoginInputDto, LoginOutputDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import * as querystring from 'node:querystring';
+import { User } from '../entities/user.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Controller('auth')
 export class AuthController {
+  constructor(
+    @InjectRepository(User)
+    private readonly userRepo: Repository<User>,
+  ) {}
+
   @Post('login')
   async login(@Body() data: LoginInputDto): Promise<LoginOutputDto> {
     const { email, password } = data;
@@ -40,7 +48,7 @@ export class AuthController {
   }
 
   @Post('register')
-  async register(@Body() data: RegisterDto) {
+  async register(@Body() data: RegisterDto): Promise<User> {
     const { email, password, username, firstName, lastName } = data;
 
     try {
@@ -53,14 +61,13 @@ export class AuthController {
           },
           body: querystring.stringify({
             client_id: process.env.KEYCLOAK_ADMIN_CLIENT_ID,
-            // client_secret: process.env.KEYCLOAK_CLIENT_SECRET,
+            client_secret: process.env.KEYCLOAK_CLIENT_SECRET,
             grant_type: 'password',
             username: process.env.KEYCLOAK_ADMIN_USERNAME,
             password: process.env.KEYCLOAK_ADMIN_PASSWORD,
           }),
         },
       );
-      console.log(adminTokenResponse);
 
       if (!adminTokenResponse.ok) {
         throw new Error('Failed to obtain admin token');
@@ -68,9 +75,8 @@ export class AuthController {
 
       const adminToken = await adminTokenResponse.json();
 
-      // Créer l'utilisateur dans Keycloak
       const userResponse = await fetch(
-        `${process.env.KEYCLOAK_URL}/admin/realms/${process.env.KEYCLOAK_REALM}/users`,
+        `${process.env.KEYCLOAK_URL}/admin/realms/myrealm/users`,
         {
           method: 'POST',
           headers: {
@@ -98,9 +104,18 @@ export class AuthController {
         throw new Error('Failed to create user');
       }
 
-      const createdUser = await userResponse.json();
-      return createdUser;
+      const locationHeader = userResponse.headers.get('Location');
+      if (!locationHeader) {
+        throw new Error('User created but ID not found in response');
+      }
+      const userId = locationHeader.split('/').pop();
+
+      return this.userRepo.save({
+        keycloak_id: userId,
+        email,
+      });
     } catch (error) {
+      console.error(error);
       throw new HttpException('Registration failed', HttpStatus.BAD_REQUEST);
     }
   }
