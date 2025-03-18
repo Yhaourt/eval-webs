@@ -1,0 +1,19 @@
+meta {
+  name: admin token
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{KEYCLOAK_URL}}/realms/master/protocol/openid-connect/token
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  client_id: admin-cli
+  client_secret: mysecret
+  grant_type: password
+  username: admin
+  password: admin
+}

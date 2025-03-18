@@ -11,6 +11,7 @@
   "dependencies": {
     "@grpc/grpc-js": "^1.13.0",
     "@grpc/proto-loader": "^0.7.13",
+    "@nestjs/config": "^4.0.1",
     "axios": "^1.8.3",
     "cookie-parser": "^1.4.6",
     "csv-parser": "^3.2.0",

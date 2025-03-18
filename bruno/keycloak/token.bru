@@ -1,0 +1,27 @@
+meta {
+  name: token
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{KEYCLOAK_URL}}/realms/myrealm/protocol/openid-connect/token
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  client_id: myclient
+  client_secret: mysecret
+  grant_type: password
+  username: testuser1@example.com
+  password: password
+}
+
+body:multipart-form {
+  client_id: myclient
+  client_secret: mysecret
+  grant_type: password
+  username: testuser1@example.com
+  password: password
+}

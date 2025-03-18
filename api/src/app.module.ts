@@ -11,9 +11,12 @@ import { UserResolver } from './resolvers/user.resolver';
 import { NotifResolver } from './resolvers/notif.resolver';
 import { ReservationResolver } from './resolvers/reservation.resolver';
 import { RoomResolver } from './resolvers/room.resolver';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -29,6 +32,7 @@ import { RoomResolver } from './resolvers/room.resolver';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       driver: ApolloDriver,
     }),
+    AuthModule,
   ],
   controllers: [],
   providers: [UserResolver, RoomResolver, ReservationResolver, NotifResolver],
