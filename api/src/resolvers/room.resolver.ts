@@ -3,6 +3,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RoomInputType, RoomType } from '../types/room.type';
 import { Room } from '../entities/room.entity';
+import { UseGuards } from '@nestjs/common';
+import { KeycloakAuthGuard } from '../auth/keycloak-auth-guard';
 
 @Resolver(() => RoomType)
 export class RoomResolver {
@@ -11,6 +13,7 @@ export class RoomResolver {
     private readonly roomRepo: Repository<Room>,
   ) {}
 
+  @UseGuards(KeycloakAuthGuard)
   @Query(() => [RoomType])
   async rooms(): Promise<Room[]> {
     return this.roomRepo.find();
