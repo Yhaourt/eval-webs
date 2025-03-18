@@ -1,0 +1,17 @@
+meta {
+  name: delete
+  type: graphql
+  seq: 5
+}
+
+post {
+  url: {{GRAPHQL_URL}}
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  mutation {
+    deleteRoom(id: "e5eb942e-3891-436a-aa87-a820da4adaf5")
+  }
+}

@@ -13,7 +13,7 @@
 # Types de base
 # ------------------------------
 
-type Room {
+type RoomEntity {
   id: ID!
   name: String!
   capacity: Int!
@@ -21,7 +21,7 @@ type Room {
   created_at: DateTime!
 }
 
-type Reservation {
+type ReservationEntity {
   id: ID!
   user_id: Int!
   room_id: Int!
@@ -43,12 +43,12 @@ type User {
 
 type Query {
   # -- Rooms --
-  listRooms(skip: Int, limit: Int): [Room!]!
-  room(id: ID!): Room
+  listRooms(skip: Int, limit: Int): [RoomEntity!]!
+  room(id: ID!): RoomEntity
 
   # -- Reservations --
-  listReservations(skip: Int, limit: Int): [Reservation!]!
-  reservation(id: ID!): Reservation
+  listReservations(skip: Int, limit: Int): [ReservationEntity!]!
+  reservation(id: ID!): ReservationEntity
 
   # -- Users --
   listUsers(skip: Int, limit: Int): [User!]!
@@ -63,8 +63,8 @@ type Mutation {
   # -- Users --
   login(email: String!, password: String!): {accessToken:String}
   # -- Rooms --
-  createRoom(name: String!, capacity: Int!, location: String): Room!
-  updateRoom(id: ID!, name: String, capacity: Int, location: String): Room!
+  createRoom(name: String!, capacity: Int!, location: String): RoomEntity!
+  updateRoom(id: ID!, name: String, capacity: Int, location: String): RoomEntity!
   deleteRoom(id: ID!): Boolean!
 
   # -- Reservations --
@@ -73,7 +73,7 @@ type Mutation {
     room_id: Int!,
     start_time: DateTime!,
     end_time: DateTime!
-  ): Reservation!
+  ): ReservationEntity!
 
   updateReservation(
     id: ID!,
@@ -81,7 +81,7 @@ type Mutation {
     room_id: Int,
     start_time: DateTime,
     end_time: DateTime
-  ): Reservation!
+  ): ReservationEntity!
 
   deleteReservation(id: ID!): Boolean!
 }

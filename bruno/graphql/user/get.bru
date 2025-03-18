@@ -1,0 +1,30 @@
+meta {
+  name: get
+  type: graphql
+  seq: 2
+}
+
+post {
+  url: {{GRAPHQL_URL}}
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  query {
+    user(id: "eebc600f-5cb6-4964-9534-61e16df49a71"){
+     id
+      keycloackId
+      email
+      createdAt
+      reservations {
+        id
+        startTime
+        endTime
+        status
+        createdAt
+        roomId
+      }
+    }
+  }
+}

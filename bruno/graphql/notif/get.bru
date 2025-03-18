@@ -1,0 +1,31 @@
+meta {
+  name: get
+  type: graphql
+  seq: 2
+}
+
+post {
+  url: {{GRAPHQL_URL}}
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  query {
+    notif(id: "a9903e01-5ed0-48ee-8d1c-6818413cc8c1"){
+      id
+      message
+      notificationDate
+      isSent
+      reservation {
+        id
+        startTime
+        endTime
+        status
+        createdAt
+        roomId
+        userId
+      }
+    }
+  }
+}

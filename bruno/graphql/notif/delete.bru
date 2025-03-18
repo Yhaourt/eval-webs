@@ -1,0 +1,17 @@
+meta {
+  name: delete
+  type: graphql
+  seq: 5
+}
+
+post {
+  url: {{GRAPHQL_URL}}
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  mutation {
+    deleteNotif(id: "ac983285-1aaa-463a-84b1-c35784d45fcc")
+  }
+}

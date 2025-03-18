@@ -1,0 +1,100 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type RoomType {
+  id: ID!
+  name: String!
+  capacity: Float!
+  location: String!
+  createdAt: DateTime!
+  reservations: [ReservationType!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type NotifType {
+  id: ID!
+  reservationId: String!
+  message: String!
+  notificationDate: DateTime!
+  isSent: Boolean!
+  createdAt: DateTime!
+  reservation: ReservationType!
+}
+
+type ReservationType {
+  id: ID!
+  roomId: String!
+  userId: String!
+  startTime: DateTime!
+  endTime: DateTime!
+  status: String!
+  createdAt: DateTime!
+  room: RoomType!
+  user: UserType!
+  notifs: [NotifType!]!
+}
+
+type UserType {
+  id: ID!
+  keycloackId: String!
+  email: String!
+  createdAt: DateTime!
+  reservations: [ReservationType!]!
+}
+
+type Query {
+  users: [UserType!]!
+  user(id: String!): UserType
+  rooms: [RoomType!]!
+  room(id: String!): RoomType
+  reservations: [ReservationType!]!
+  reservation(id: String!): ReservationType
+  notifs: [NotifType!]!
+  notif(id: String!): NotifType
+}
+
+type Mutation {
+  createUser(input: UserInputType!): UserType!
+  updateUser(id: String!, input: UserInputType!): UserType!
+  deleteUser(id: String!): Boolean!
+  createRoom(input: RoomInputType!): RoomType!
+  updateRoom(id: String!, input: RoomInputType!): RoomType!
+  deleteRoom(id: String!): Boolean!
+  createReservation(input: ReservationInputType!): ReservationType!
+  updateReservation(id: String!, input: ReservationInputType!): ReservationType!
+  deleteReservation(id: String!): Boolean!
+  createNotif(input: NotifInputType!): NotifType!
+  updateNotif(id: String!, input: NotifInputType!): NotifType!
+  deleteNotif(id: String!): Boolean!
+}
+
+input UserInputType {
+  keycloackId: String!
+  email: String!
+}
+
+input RoomInputType {
+  name: String!
+  capacity: Float!
+  location: String!
+}
+
+input ReservationInputType {
+  roomId: String!
+  userId: String!
+  startTime: DateTime!
+  endTime: DateTime!
+  status: String!
+}
+
+input NotifInputType {
+  reservationId: String!
+  message: String!
+  notificationDate: DateTime!
+  isSent: Boolean!
+}

@@ -27,7 +27,7 @@ Cette table représente les différentes salles pouvant être réservées.
 | Champ        | Type            | Description                                          |
 |--------------|-----------------|------------------------------------------------------|
 | `id`         | `SERIAL` (PK)   | Identifiant unique de la salle (Primary Key).        |
-| `name`       | `VARCHAR(100)`  | Nom de la salle (ex: "Salle A", "Meeting Room #1").  |
+| `name`       | `VARCHAR(100)`  | Nom de la salle (ex: "Salle A", "Meeting RoomEntity #1").  |
 | `capacity`   | `INT`           | Capacité maximale (nombre de personnes).            |
 | `location`   | `VARCHAR(255)`  | Informations sur l’emplacement (étage, bâtiment).   |
 | `created_at` | `TIMESTAMP`     | Date et heure de création de l’enregistrement.       |

@@ -1,0 +1,39 @@
+meta {
+  name: create
+  type: graphql
+  seq: 3
+}
+
+post {
+  url: {{GRAPHQL_URL}}
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  mutation {
+    createUser(input: {
+      keycloackId: "1",
+      email: "1@example.com"
+    }) {
+      id
+      keycloackId
+      email
+      createdAt
+      reservations {
+        id
+        startTime
+        endTime
+        status
+        createdAt
+        room {
+          id
+          name
+          capacity
+          location
+          createdAt
+        }
+      }
+    }
+  }
+}

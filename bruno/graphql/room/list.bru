@@ -1,0 +1,32 @@
+meta {
+  name: list
+  type: graphql
+  seq: 1
+}
+
+post {
+  url: {{GRAPHQL_URL}}
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  query {
+    rooms {
+      id
+      name
+      capacity
+      location
+      createdAt
+      reservations {
+        id
+        roomId
+        userId
+        startTime
+        endTime
+        status
+        createdAt
+      }
+    }
+  }
+}

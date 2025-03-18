@@ -1,0 +1,32 @@
+meta {
+  name: get
+  type: graphql
+  seq: 2
+}
+
+post {
+  url: {{GRAPHQL_URL}}
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  query {
+    room(id: "11e14b9b-0a93-43b5-9f33-0129a71a0430") {
+      id
+      name
+      capacity
+      location
+      createdAt
+      reservations {
+        id
+        roomId
+        userId
+        startTime
+        endTime
+        status
+        createdAt
+      }
+    }
+  }
+}

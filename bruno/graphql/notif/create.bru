@@ -1,0 +1,36 @@
+meta {
+  name: create
+  type: graphql
+  seq: 3
+}
+
+post {
+  url: {{GRAPHQL_URL}}
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  mutation {
+    createNotif(input: {
+      reservationId: "1748bbe2-c591-4ce4-a182-ab9e5b9c1c2b",
+      message: "notif",
+      notificationDate: "2025-03-19T10:00:00Z",
+      isSent: true
+    }) {
+     id
+      message
+      notificationDate
+      isSent
+      reservation {
+        id
+        startTime
+        endTime
+        status
+        createdAt
+        roomId
+        userId
+      }
+    }
+  }
+}

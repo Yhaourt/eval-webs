@@ -1,0 +1,17 @@
+meta {
+  name: delete
+  type: graphql
+  seq: 5
+}
+
+post {
+  url: {{GRAPHQL_URL}}
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  mutation {
+    deleteReservation(id: "10f17b43-2d19-4f23-bc08-63bd39292b9b")
+  }
+}

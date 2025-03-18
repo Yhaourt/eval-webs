@@ -1,0 +1,42 @@
+meta {
+  name: create
+  type: graphql
+  seq: 3
+}
+
+post {
+  url: {{GRAPHQL_URL}}
+  body: graphql
+  auth: none
+}
+
+body:graphql {
+  mutation {
+    createReservation(input: {
+      roomId: "11e14b9b-0a93-43b5-9f33-0129a71a0430",
+      userId: "eebc600f-5cb6-4964-9534-61e16df49a71",
+      startTime: "2025-03-19T10:00:00Z",
+      endTime: "2025-03-19T10:00:00Z",
+      status: "pending"
+    }) {
+    id
+      startTime
+      endTime
+      status
+      createdAt
+      room {
+        id
+        name
+        capacity
+        location
+        createdAt
+      }
+      user {
+        id
+        keycloackId
+        email
+        createdAt
+      }
+    }
+  }
+}
