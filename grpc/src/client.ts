@@ -1,53 +1,41 @@
 import * as grpc from '@grpc/grpc-js';
 import * as protoLoader from '@grpc/proto-loader';
-import * as path from 'path';
+import { join } from 'path';
 
-// Charger le fichier proto
-const protoPath = path.resolve(__dirname, './proto/notification.proto');
-const packageDefinition = protoLoader.loadSync(protoPath, {
+// Chemin vers ton .proto
+const PROTO_PATH = join(__dirname, './protos/notification.proto');
+
+// Chargement du .proto
+const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
   keepCase: true,
   longs: String,
   enums: String,
   defaults: true,
   oneofs: true,
-  includeDirs: [
-    path.resolve(__dirname, './proto'),
-    path.resolve(__dirname, '../node_modules/google-proto-files'),
-  ],
 });
-interface NotificationService extends grpc.Client {
-  ExportReservationsToCSV(
-    request: { user_id: string },
-    callback: (
-      err: grpc.ServiceError | null,
-      response: { url: string },
-    ) => void
-  ): void;
-}
+const protoDescriptor = grpc.loadPackageDefinition(packageDefinition) as any;
+const notificationPackage = protoDescriptor.notification;
 
-const proto = grpc.loadPackageDefinition(packageDefinition)
-  .notification as unknown as {
-  NotificationService: new (
-    address: string,
-    credentials: grpc.ChannelCredentials,
-  ) => NotificationService;
-};
 
-// Créer le client gRPC
-const client = new proto.NotificationService(
-  'localhost:50051', // Adresse du serveur gRPC
-  grpc.credentials.createInsecure(), // Pas de sécurité pour ce test
+
+// Création du client gRPC
+const client = new notificationPackage.NotificationService(
+  'localhost:50051',
+  grpc.credentials.createInsecure(),
 );
 
-// Appel à la méthode ExportReservationsToCSV
-const userId = 'ton-user-id'; // Remplace par un user_id valide
-client.ExportReservationsToCSV(
-  { user_id: userId },
+
+// Appel de CreateNotification avec **reservationId**
+client.CreateNotification(
+  {
+    reservation_id: '8d272acf-b147-4c53-9fb0-5f233617b15d',  // ← Mets ici un UUID de réservation existant
+    message: 'Ça fonctionne !',
+  },
   (err: grpc.ServiceError | null, response: any) => {
     if (err) {
-      console.error('Erreur:', err);
-      return;
+      console.error('Erreur CreateNotification:', err);
+    } else {
+      console.log('Réponse CreateNotification:', response);
     }
-    console.log('URL CSV:', response.url);
   },
 );

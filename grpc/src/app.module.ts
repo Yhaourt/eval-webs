@@ -4,6 +4,8 @@ import { User } from './entities/user.entity';
 import { Room } from './entities/room.entity';
 import { Reservation } from './entities/reservation.entity';
 import { Notif } from './entities/notif.entity';
+import { NotificationService } from './services/notification.service';
+import { NotificationController } from './controllers/notification.controller';
 
 @Module({
   imports: [
@@ -19,8 +21,8 @@ import { Notif } from './entities/notif.entity';
     }),
     TypeOrmModule.forFeature([User, Room, Reservation, Notif]), 
   ],
-  controllers: [],
-  providers: [],
+  controllers: [NotificationController],
+  providers: [NotificationService],
 })
 export class AppModule {}
 
